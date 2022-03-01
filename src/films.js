@@ -21,8 +21,22 @@ function getMoviesFromDirector(array, director) {
 // Exercise 3: Calculate the average of the films of a given director.
 function moviesAverageOfDirector(array, director) {
 
-  
+  let averageScore = 0;
 
+  let result = array.reduce( (previousValue, currentValue) => {
+
+    if (currentValue.director === director) {
+      previousValue ++;
+      averageScore += currentValue.score;
+    }
+
+    return previousValue;
+
+  }, 0 );
+
+  result = Number((averageScore/result).toFixed(2));
+/*   console.log("EXERCICE 3 ->", result); */
+  return result;
 
 }
 
