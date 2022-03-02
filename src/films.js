@@ -1,4 +1,3 @@
-// Exercise 1: Get the array of all directors.
 function getAllDirectors(array) {
 
   let result = array.map((film) => film.director);
@@ -8,7 +7,6 @@ function getAllDirectors(array) {
 
 }
 
-// Exercise 2: Get the films of a certain director
 function getMoviesFromDirector(array, director) {
 
   let result = array.filter((film) => film.director === director);
@@ -18,12 +16,11 @@ function getMoviesFromDirector(array, director) {
   
 }
 
-// Exercise 3: Calculate the average of the films of a given director.
 function moviesAverageOfDirector(array, director) {
 
   let averageScore = 0;
 
-  let result = array.reduce( (previousValue, currentValue) => {
+  let result = array.reduce((previousValue, currentValue) => {
 
     if (currentValue.director === director) {
       previousValue ++;
@@ -39,8 +36,7 @@ function moviesAverageOfDirector(array, director) {
   return result;
 
 }
-
-// Exercise 4:  Alphabetic order by title 
+ 
 function orderAlphabetically(array) {
   
   let title = array.map((film) => film.title);
@@ -51,7 +47,6 @@ function orderAlphabetically(array) {
 
 }
 
-// Exercise 5: Order by year, ascending
 function orderByYear(array) {
 
   // spread
@@ -83,24 +78,36 @@ function orderByYear(array) {
 
 }
 
-// Exercise 6: Calculate the average of the movies in a category
-function moviesAverageByCategory() {
+function moviesAverageByCategory(array, category) {
 
-  // code
+  let filmsCategory = array.filter((element) => {
+    if(element.genre.includes(category) && element.score != false ){
+      return element;
+    }
+  })
 
-/*   console.log("EXERCICE 6 ->", result);
-  return result;  */
+  let result = filmsCategory.reduce((acc, cur) => {
+    return acc + cur.score;
+  }, 0 );
+ 
+  result = result/filmsCategory.length;
+
+/*   console.log("EXERCICE 6 ->", result); */
+  return result;
 
 }
 
-// Exercise 7: Modify the duration of movies to minutes
-function hoursToMinutes() {
+function hoursToMinutes(array, duration) {
 
-    // code
+/*     let filmsDuration = array.filter((film) => film.duration === duration);
 
-/*     console.log("EXERCICE 7 ->", result);
-    return result;  */
+    let result = filmsDuration.reduce((acc, cur) => {
+      return;
+    })
 
+    console.log("EXERCICE 7 ->", result);
+    return result; 
+ */
 }
 
 // Exercise 8: Get the best film of a year
