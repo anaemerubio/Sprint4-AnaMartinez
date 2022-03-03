@@ -1,5 +1,6 @@
 function getAllDirectors(array) {
 
+  // Devuelve un array nuevo con los resultados de la llamada a la función indicada
   let result = array.map((film) => film.director);
   
 /*   console.log("EXERCICE 1 ->", result); */
@@ -9,6 +10,7 @@ function getAllDirectors(array) {
 
 function getMoviesFromDirector(array, director) {
 
+  // Nuevo array con los elementos que cumplan la condición de la llamada
   let result = array.filter((film) => film.director === director);
 
 /*   console.log("EXERCICE 2 ->", result); */
@@ -18,10 +20,13 @@ function getMoviesFromDirector(array, director) {
 
 function moviesAverageOfDirector(array, director) {
 
+  // variable para guardar todas las notas
   let averageScore = 0;
 
+  // De una array devuelve un solo elemento (reduce())
   let result = array.reduce((previousValue, currentValue) => {
 
+    // Si coninciden los directores se suma el score en averageScore
     if (currentValue.director === director) {
       previousValue ++;
       averageScore += currentValue.score;
@@ -31,15 +36,22 @@ function moviesAverageOfDirector(array, director) {
 
   }, 0 );
 
+  // En result se guardaran el numero de directores y en averageScore todas las notas
+  // Hacemos la media y que solo devuelva 2 decimales con el método .toFixed()
   result = Number((averageScore/result).toFixed(2));
 /*   console.log("EXERCICE 3 ->", result); */
   return result;
 
 }
- 
+
 function orderAlphabetically(array) {
   
+  // almacenar titulos en una variable
   let title = array.map((film) => film.title);
+
+  // sort() ordena los elementos de una array, como son strings lo hace alfabéticamente
+  // slice() devuelve elementos seleccionados de una array,
+  //en este caso los primeros 20 elementos
   let result = title.sort().slice(0, 20);
 
 /*   console.log("EXERCICE 4 ->", result); */
@@ -49,28 +61,28 @@ function orderAlphabetically(array) {
 
 function orderByYear(array) {
 
-  // spread
+  // Spread operator, es como .slice() copia arrays
   let filmsToOrder = [...array];
 
+  // Ordenar films por orden
   let result = filmsToOrder.sort((yearA, yearB) => {
 
-    // Order by year
+    // si A < B bajamos una posición en el indice
     if (yearA.year < yearB.year) {
         return -1;
 
+    // si B < A subimos una posición en el indice
     } else if (yearA.year > yearB.year) {
         return 1;
 
-    // If year ==, compare title
+    // Si es el mismo año comparamos los títulos y ordenamos alfabéticamente (ya que usamos sort())
     } else {
         if (yearA.title < yearB.title){
             return -1;
         } else {
             return 1;
         }
-
     }
-
   });
 
 /*   console.log("EXERCICE 5 ->", result); */
@@ -80,6 +92,7 @@ function orderByYear(array) {
 
 function moviesAverageByCategory(array, category) {
 
+  // Si una peliculas tiene
   let filmsCategory = array.filter((element) => {
     if(element.genre.includes(category) && element.score != false ){
       return element;
@@ -99,27 +112,38 @@ function moviesAverageByCategory(array, category) {
 
 function hoursToMinutes(array, duration) {
 
-/*     let filmsDuration = array.filter((film) => film.duration === duration);
+  // includes ? para saber qué tiene una array
 
-    let result = filmsDuration.reduce((acc, cur) => {
-      return;
-    })
-
-    console.log("EXERCICE 7 ->", result);
-    return result; 
- */
 }
 
 // Exercise 8: Get the best film of a year
-function bestFilmOfYear() {
-
-    // code
-
-/*     console.log("EXERCICE 8 ->", result);
-    return result;  */
+function bestFilmOfYear(array, year) {
   
-}
+  // Spread
+  let films = [...array];
 
+  // Array solo con las pelis que sean del mismo año
+  let sameYearFilms = films.filter(element => element.year === year);
+
+  // Comparar score de las peliculas que sean del mismo año
+  let filmsClassed = sameYearFilms.sort((filmA, filmB) => {
+      if (filmA.score < filmB.score) {
+          return 1;
+      } else if (filmA.score > filmB.score) {
+          return -1;
+      } else {
+          return 0;
+      }
+  });
+
+  let result = [];
+  // solo meter en la array el primer elemento de las pelis ordendas (La mejor peli)
+  result.push(filmsClassed[0]);
+  
+  console.log("EXERCICE 8 ->", result);
+  return result;
+  
+  }
 
 
 // The following is required to make unit tests work.
