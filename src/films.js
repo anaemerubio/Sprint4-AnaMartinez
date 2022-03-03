@@ -20,27 +20,18 @@ function getMoviesFromDirector(array, director) {
 
 function moviesAverageOfDirector(array, director) {
 
-  // variable para guardar todas las notas
-  let averageScore = 0;
+  // Filtrar peliculas de un director
+  let moviesDirector = array.filter((film) => film.director === director);
 
-  // De una array devuelve un solo elemento (reduce())
-  let result = array.reduce((previousValue, currentValue) => {
-
-    // Si coninciden los directores se suma el score en averageScore
-    if (currentValue.director === director) {
-      previousValue ++;
-      averageScore += currentValue.score;
-    }
-
-    return previousValue;
-
+  // Guardar todas las notas de sus peliculas
+  let averageScore = moviesDirector.reduce((acc, cur) => {
+    return acc + cur.score;
   }, 0 );
 
-  // En result se guardaran el numero de directores y en averageScore todas las notas
-  // Hacemos la media y que solo devuelva 2 decimales con el método .toFixed()
-  result = Number((averageScore/result).toFixed(2));
-/*   console.log("EXERCICE 3 ->", result); */
-  return result;
+  // Notas de las peliculas / número de películas = media de directos | toFixed(2) -> 2 decimales
+  averageScore = Number(averageScore/moviesDirector.length.toFixed(2));
+/*   console.log("EXERCICE 3 ->", averageScore); */
+  return averageScore;
 
 }
 
@@ -114,9 +105,10 @@ function hoursToMinutes(array, duration) {
 
   // includes ? para saber qué tiene una array
 
+
+
 }
 
-// Exercise 8: Get the best film of a year
 function bestFilmOfYear(array, year) {
   
   // Spread
@@ -140,7 +132,7 @@ function bestFilmOfYear(array, year) {
   // solo meter en la array el primer elemento de las pelis ordendas (La mejor peli)
   result.push(filmsClassed[0]);
   
-  console.log("EXERCICE 8 ->", result);
+/*   console.log("EXERCICE 8 ->", result); */
   return result;
   
   }
