@@ -83,13 +83,14 @@ function orderByYear(array) {
 
 function moviesAverageByCategory(array, category) {
 
-  // Si una peliculas tiene
+  // Comprobar el genero y que tenga score y entonces lo mete en la array
   let filmsCategory = array.filter((element) => {
     if(element.genre.includes(category) && element.score != false ){
       return element;
     }
   })
 
+  // igual que ej 3
   let result = filmsCategory.reduce((acc, cur) => {
     return acc + cur.score;
   }, 0 );
@@ -101,11 +102,23 @@ function moviesAverageByCategory(array, category) {
 
 }
 
-function hoursToMinutes(array, duration) {
+function hoursToMinutes(array) {
 
-  // includes ? para saber qué tiene una array
+  let films = array.map( element => {
+    return {...element};
+  });
 
+  let result = films.map((film) => {
+      // Borra todo lo que no es un número
+      film.duration = film.duration.replace(/[^0-9]+/g, '');
+      // charAt devuelve el primer carácter de una cadena / Eso * 60, convierte horas en minutos
+      // substr quita parte de un string, solo deja los números
+      film.duration = (film.duration.charAt(0)*60) + Number(film.duration.substr(1));
+      return film;
+  });
 
+  console.log("EXERCICE 7 ->", result);
+  return result;
 
 }
 
@@ -129,13 +142,13 @@ function bestFilmOfYear(array, year) {
   });
 
   let result = [];
-  // solo meter en la array el primer elemento de las pelis ordendas (La mejor peli)
+  // Solo meter en la array el primer elemento de las pelis ordendas (La mejor peli)
   result.push(filmsClassed[0]);
   
 /*   console.log("EXERCICE 8 ->", result); */
   return result;
   
-  }
+}
 
 
 // The following is required to make unit tests work.
